@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -49,7 +47,7 @@ export default function Home() {
               <div className="text-2xl font-bold text-indigo-800">落叶生图</div>
             </div>
             <div className="flex items-center">
-              <Link href="/" className="px-3 py-2 rounded-md text-sm font-medium text-indigo-700 hover:text-indigo-900 hover:bg-indigo-100 bg-indigo-100">
+              <Link href="/" className="px-3 py-2 rounded-md text-sm font-medium text-indigo-700 hover:text-indigo-900 hover:bg-indigo-100">
                 首页
               </Link>
               <Link href="/nine-grid" className="px-3 py-2 rounded-md text-sm font-medium text-indigo-700 hover:text-indigo-900 hover:bg-indigo-100">
@@ -209,4 +207,4 @@ export default function Home() {
       </footer>
     </main>
   );
-}
+} 
