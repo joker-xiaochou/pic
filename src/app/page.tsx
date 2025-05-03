@@ -159,18 +159,19 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-8 bg-gray-50">
+    <main className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-8">九宫格图片生成器</h1>
+        <h1 className="text-4xl font-bold text-center mb-2 text-indigo-800">落叶生图</h1>
+        <p className="text-center mb-8 text-indigo-600">轻松创建精美的九宫格照片墙</p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* 上传区域 */}
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">上传图片</h2>
+          <div className="bg-white p-6 rounded-xl shadow-xl backdrop-blur-sm bg-opacity-80 border border-indigo-100">
+            <h2 className="text-xl font-semibold mb-4 text-indigo-700">上传图片</h2>
             <div 
               ref={dropZoneRef}
-              className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-                isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
+              className={`border-2 border-dashed rounded-lg p-8 text-center transition-all ${
+                isDragging ? 'border-indigo-500 bg-indigo-50' : 'border-indigo-200 hover:border-indigo-300'
               }`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -190,7 +191,7 @@ export default function Home() {
               >
                 <div className="space-y-2">
                   <svg
-                    className="mx-auto h-12 w-12 text-gray-400"
+                    className="mx-auto h-12 w-12 text-indigo-400"
                     stroke="currentColor"
                     fill="none"
                     viewBox="0 0 48 48"
@@ -203,29 +204,29 @@ export default function Home() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <p className="text-gray-600">点击或拖拽图片到这里</p>
-                  <p className="text-sm text-gray-500">支持 JPG, PNG, GIF 格式</p>
-                  <p className="text-sm text-gray-500">已上传 {images.length} 张图片</p>
+                  <p className="text-indigo-600">点击或拖拽图片到这里</p>
+                  <p className="text-sm text-indigo-500">支持 JPG, PNG, GIF 格式</p>
+                  <p className="text-sm text-indigo-500">已上传 {images.length} 张图片</p>
                 </div>
               </label>
             </div>
 
             {/* 已上传图片预览 */}
             {images.length > 0 && (
-              <div className="mt-4">
-                <h3 className="text-lg font-medium mb-2">已上传图片</h3>
-                <div className="grid grid-cols-3 gap-2 max-h-96 overflow-y-auto">
+              <div className="mt-6 bg-indigo-50 p-4 rounded-lg">
+                <h3 className="text-lg font-medium mb-2 text-indigo-700">已上传图片</h3>
+                <div className="grid grid-cols-3 gap-3 max-h-96 overflow-y-auto p-2">
                   {images.map((src, index) => (
-                    <div key={index} className="group aspect-square relative">
+                    <div key={index} className="group aspect-square relative rounded-lg overflow-hidden shadow-md">
                       <Image
                         src={src}
                         alt={`上传的图片 ${index + 1}`}
                         fill
-                        className="object-cover rounded"
+                        className="object-cover"
                       />
                       <button
                         onClick={() => removeImage(index)}
-                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
                       >
                         ×
                       </button>
@@ -234,7 +235,7 @@ export default function Home() {
                 </div>
                 <button
                   onClick={handleGenerateGrid}
-                  className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+                  className="mt-4 w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-3 px-4 rounded-lg hover:from-indigo-600 hover:to-purple-700 transition-all shadow-md font-medium"
                   disabled={isGenerating}
                 >
                   {isGenerating ? '生成中...' : '生成九宫格'}
@@ -244,14 +245,14 @@ export default function Home() {
           </div>
 
           {/* 预览区域 */}
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          <div className="bg-white p-6 rounded-xl shadow-xl backdrop-blur-sm bg-opacity-80 border border-indigo-100">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">预览效果</h2>
+              <h2 className="text-xl font-semibold text-indigo-700">预览效果</h2>
               {gridPreview.length > 0 && (
                 <button
                   onClick={handleDownloadAll}
                   disabled={isDownloadingAll}
-                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-lg hover:from-emerald-600 hover:to-teal-700 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                 >
                   {isDownloadingAll ? '下载中...' : '下载所有九宫格'}
                 </button>
@@ -260,24 +261,24 @@ export default function Home() {
             <div className="space-y-8">
               {isGenerating ? (
                 <div className="h-64 flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+                  <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-200 border-b-indigo-600"></div>
                 </div>
               ) : gridPreview.length > 0 ? (
                 // 将预览分成多个九宫格
                 Array.from({ length: Math.ceil(gridPreview.length / 9) }).map((_, gridIndex) => (
-                  <div key={gridIndex} className="space-y-2">
+                  <div key={gridIndex} className="space-y-3 bg-indigo-50 p-4 rounded-lg">
                     <div className="flex justify-between items-center">
-                      <h3 className="text-lg font-medium">第 {gridIndex + 1} 组九宫格</h3>
+                      <h3 className="text-lg font-medium text-indigo-700">第 {gridIndex + 1} 组九宫格</h3>
                       <button
                         onClick={() => handleDownloadGrid(gridIndex)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+                        className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md font-medium"
                       >
                         下载整组
                       </button>
                     </div>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-3 gap-3">
                       {gridPreview.slice(gridIndex * 9, (gridIndex + 1) * 9).map((src, index) => (
-                        <div key={index} className="group aspect-square relative border border-gray-200">
+                        <div key={index} className="group aspect-square relative rounded-lg overflow-hidden shadow-md">
                           {src ? (
                             <>
                               <Image
@@ -288,13 +289,13 @@ export default function Home() {
                               />
                               <button
                                 onClick={() => handleDownload(gridIndex * 9 + index)}
-                                className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white"
+                                className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium"
                               >
                                 下载单张
                               </button>
                             </>
                           ) : (
-                            <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+                            <div className="absolute inset-0 flex items-center justify-center text-indigo-400 bg-indigo-100">
                               留白
                             </div>
                           )}
@@ -304,13 +305,21 @@ export default function Home() {
                   </div>
                 ))
               ) : (
-                <div className="h-64 flex items-center justify-center text-gray-500">
-                  上传图片后预览效果
+                <div className="h-64 flex flex-col items-center justify-center text-indigo-500 bg-indigo-50 rounded-lg p-6">
+                  <svg className="w-16 h-16 mb-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                  <p>上传图片后预览效果</p>
+                  <p className="text-sm mt-2 text-indigo-400">创建精美的照片墙</p>
                 </div>
               )}
             </div>
           </div>
         </div>
+        
+        <footer className="mt-12 text-center text-indigo-500 text-sm">
+          <p>落叶生图 © {new Date().getFullYear()} 版权所有</p>
+        </footer>
       </div>
     </main>
   );
